@@ -1,5 +1,11 @@
+import Main from '../../pages/Main/Main';
+
 function App(): JSX.Element {
-  return <p>Hello, world!</p>;
+  return (
+    < Main
+      rentAmount={312}
+    />
+  );
 }
 
 export default App;
