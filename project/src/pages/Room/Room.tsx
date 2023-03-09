@@ -1,5 +1,5 @@
 
-function Room() {
+function Room(): JSX.Element {
   return (
     <main className="page__main page__main--property">
       <section className="property">
