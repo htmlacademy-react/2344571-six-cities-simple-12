@@ -1,5 +1,5 @@
 
-function Login () {
+function Login(): JSX.Element {
   return(
     <div className="page page--gray page--login">
       <div style={{display: 'none'}}>
