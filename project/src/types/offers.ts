@@ -4,11 +4,6 @@ type LocationType = {
   zoom: number;
 };
 
-type CityType = {
-  location: LocationType;
-  name: string;
-};
-
 type HostType = {
   avatarUrl: string;
   id: number;
@@ -33,6 +28,11 @@ type OfferType = {
   rating: number;
   title: string;
   type: string;
+};
+
+type CityType = {
+  location: LocationType;
+  name: string;
 };
 
 type OffersType = OfferType[];
