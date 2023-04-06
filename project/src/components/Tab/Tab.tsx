@@ -1,18 +1,23 @@
-type CityProps = {
-    city: string;
+import cn from 'classnames';
+
+type TabProps = {
+	city: string;
+	activeTab: string;
+	onTabClick: (city: string) => void;
 }
 
-function Tab({ city }: CityProps): JSX.Element {
+function Tab({ city, activeTab, onTabClick }: TabProps): JSX.Element {
+
+  const linkClassName = cn('locations__item-link tabs__item', {
+    'tabs__item--active': city === activeTab,
+  });
+
   return (
-    <section className="locations container">
-      <ul className="locations__list tabs__list">
-        <li className="locations__item">
-          <a className="locations__item-link tabs__item" href="#">
-            <span>{city}</span>
-          </a>
-        </li>
-      </ul>
-    </section>
+    <li className="locations__item">
+		  <a className={linkClassName} href="#" onClick={() => onTabClick(city)}>
+        <span>{city}</span>
+      </a>
+    </li>
   );
 }
 

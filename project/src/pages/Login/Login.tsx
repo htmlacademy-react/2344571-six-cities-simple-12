@@ -1,6 +1,8 @@
+import Logo from '../../components/Logo/Logo';
 
 function Login(): JSX.Element {
   return(
+
     <div className="page page--gray page--login">
       <div style={{display: 'none'}}>
         <svg xmlns="http://www.w3.org/2000/svg">
@@ -15,9 +17,8 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </a>
+              <Logo/>
+              <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
             </div>
           </div>
         </div>
