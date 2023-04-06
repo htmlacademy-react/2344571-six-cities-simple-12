@@ -1,15 +1,25 @@
-//import { useState } from 'react';
-import { Offer } from '../../types/offer';
-import OfferCard from '../OfferCard/OfferCard';
+import PlaceCard from '../PlaceCard/PlaceCard';
+import { OffersType } from '../../types/offers';
 
-interface Props {
-  offers: Offer[];
+type OffersListProps = {
+	offers: OffersType;
+	onOfferMouseOver?: (id: number) => void;
+	onOfferMouseLeave?: () => void;
 }
 
-function Offers({ offers }: Props): JSX.Element {
-  // const [selectOffer, setSelectOffer] = useState(null);
-
-  return <div>{offers.map((offer) => (<OfferCard offer={offer} key={offer.id} />))}</div>;
+function Offers({ offers, onOfferMouseOver, onOfferMouseLeave }: OffersListProps): JSX.Element {
+  return (
+    <div className="cities__places-list places__list tabs__content">
+      {offers.map((offer) => (
+        <PlaceCard
+          key={offer.id}
+          offer={offer}
+          onOfferMouseOver={onOfferMouseOver}
+          onOfferMouseLeave={onOfferMouseLeave}
+        />
+      ))}
+    </div>
+  );
 }
 
 export default Offers;
