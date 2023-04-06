@@ -57,8 +57,8 @@ function Main({ offers, user }: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {cities.map((city) =>
-                (<Tab
+              {cities.map((city) => (
+                <Tab
                   city={city}
                   key={city}
                   onTabClick={handleTabClick}
@@ -90,7 +90,6 @@ function Main({ offers, user }: MainProps): JSX.Element {
                     activeOfferID={activeOfferID}
                     screenClass={'cities'}
                   />
-                 
                 </div>
               </div>
             )

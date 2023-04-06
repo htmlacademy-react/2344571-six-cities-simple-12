@@ -18,9 +18,9 @@ function App({ offers, reviews, user }: AppProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-			  <Route path="/" element={< Main offers={offers} user={user} />} />
+        <Route path="/" element={< Main offers={offers} user={user} />} />
         <Route path="Login" element={<Login />} />
-			  <Route path="/offer/:id" element={<Room offers={offers} reviews={reviews} user={user} />} />
+        <Route path="/offer/:id" element={<Room offers={offers} reviews={reviews} user={user} />} />
         <Route path='*' element={<PageNotFound />} />
       </Routes>
     </BrowserRouter >

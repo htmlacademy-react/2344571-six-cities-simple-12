@@ -13,8 +13,8 @@ function Tab({ city, activeTab, onTabClick }: TabProps): JSX.Element {
   });
 
   return (
-    <li className="locations__item">
-		  <a className={linkClassName} href="#" onClick={() => onTabClick(city)}>
+    <li className="locations__item" onClick={() => onTabClick(city)}>
+      <a className={linkClassName} href="#">
         <span>{city}</span>
       </a>
     </li>

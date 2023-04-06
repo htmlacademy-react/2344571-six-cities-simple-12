@@ -20,7 +20,7 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
   const params = useParams();
   const offerId = Number(params.id);
   const currentOffer = offers.filter((offer) => offer.id === offerId)[0];
-  const {images, title, isPremium, rating, price, type, bedrooms, maxAdults, goods, host, description, } = currentOffer;
+  const { images, title, isPremium, rating, price, type, bedrooms, maxAdults, goods, host, description, } = currentOffer;
 
   const closeOffers = offers
     .filter((offer) => offer.city.name === currentOffer.city.name)
@@ -36,10 +36,7 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              {isPremium &&
-				<div className="property__mark">
-				  <span>Premium</span>
-				</div>}
+              {isPremium && <div className="property__mark"> <span>Premium</span> </div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
                   {title}
@@ -100,7 +97,7 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
                 <ul className="reviews__list">
                   {reviews.map((review) => <Review review={review} key={review.id} />)}
                 </ul>
-                <ReviewForm/>
+                <ReviewForm />
               </section>
             </div>
           </div>

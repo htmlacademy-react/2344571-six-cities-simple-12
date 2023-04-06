@@ -8,18 +8,13 @@ type OfferCardProps = {
 	onOfferMouseLeave?: () => void;
 }
 
-function PlaceCard({ offer, onOfferMouseOver, onOfferMouseLeave }:OfferCardProps): JSX.Element {
+function PlaceCard({ offer, onOfferMouseOver, onOfferMouseLeave }: OfferCardProps): JSX.Element {
   const { id, isFavorite, isPremium, previewImage, price, rating, title, type } = offer;
   return (
-    <article className="cities__card place-card"
-		  onMouseOver={() => onOfferMouseOver?.(id)}
-		  onMouseLeave={() => onOfferMouseLeave?.()}
-    >
+    <article className="cities__card place-card" onMouseOver={() => onOfferMouseOver?.(id)} onMouseLeave={() => onOfferMouseLeave?.()}>
       <div className="cities__image-wrapper place-card__image-wrapper">
         {isPremium &&
-			<div className="place-card__mark">
-			  <span>Premium</span>
-			</div>}
+					<div className="place-card__mark"> <span>Premium</span> </div>}
         <Link to={generatePath('/offer/:id', { id: `${id}` })}>
           <img
             className="place-card__image"
