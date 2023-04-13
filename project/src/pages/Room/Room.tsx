@@ -2,21 +2,19 @@ import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import OfferImageWrapper from '../../components/OfferImageWrapper/OfferImageWrapper';
-import { OffersType } from '../../types/offers';
-import { ReviewsType } from '../../types/reviews';
-import { UserType } from '../../types/user';
 import OfferInsideItem from '../../components/OfferInsideItem/OfferInsideItem';
 import Review from '../../components/Review/Review';
 import ReviewForm from '../../components/ReviewForm/ReviewForm';
 import PlaceCard from '../../components/PlaceCard/PlaceCard';
+import Map from '../../components/Map/Map';
+import { useAppSelector } from '../../hooks';
 
-type RoomProps = {
-	offers: OffersType;
-	reviews: ReviewsType;
-	user: UserType;
-}
+const Neighbourhoods = 3;
 
-function Room({ offers, reviews, user }: RoomProps): JSX.Element {
+function Room(): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
+  const reviews = useAppSelector((state) => state.reviews);
+
   const params = useParams();
   const offerId = Number(params.id);
   const currentOffer = offers.filter((offer) => offer.id === offerId)[0];
@@ -24,14 +22,16 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
 
   const closeOffers = offers
     .filter((offer) => offer.city.name === currentOffer.city.name)
-    .filter((offer) => offer.id !== currentOffer.id);
+    .filter((offer) => offer.id !== currentOffer.id)
+    .slice(0, Neighbourhoods);
+
   return (
-    <><Header user={user} />
+    <><Header />
       <main className="page__main page__main--property">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              {images.map((src) => <OfferImageWrapper src={src} offer={currentOffer} key={Math.random()} />)}
+              {images.map((src) => <OfferImageWrapper src={src} offer={currentOffer} key={src} />)}
             </div>
           </div>
           <div className="property__container container">
@@ -74,7 +74,7 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt={host.name} />
                   </div>
                   <span className="property__user-name">
                     {host.name}
@@ -87,9 +87,6 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
                   <p className="property__text">
                     {description}
                   </p>
-                  <p className="property__text">
-                    {description}
-                  </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
@@ -97,17 +94,20 @@ function Room({ offers, reviews, user }: RoomProps): JSX.Element {
                 <ul className="reviews__list">
                   {reviews.map((review) => <Review review={review} key={review.id} />)}
                 </ul>
-                <ReviewForm />
+                <ReviewForm/>
               </section>
             </div>
           </div>
-          <section className="property__map map"></section>
+          <Map
+            cityInfo={currentOffer.city}
+            points={closeOffers}
+          />
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              {closeOffers.map((offer) => <PlaceCard offer={offer} key={offer.id} />)}
+              {closeOffers.map((offer) => (<PlaceCard offer={offer} key={offer.id} />))}
             </div>
           </section>
         </div>

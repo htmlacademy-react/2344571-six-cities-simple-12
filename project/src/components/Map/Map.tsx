@@ -4,6 +4,7 @@ import { Icon, Marker } from 'leaflet';
 import { CityType, OffersType } from '../../types/offers';
 import { useRef, useEffect } from 'react';
 import cn from 'classnames';
+import { useLocation } from 'react-router-dom';
 
 const defaultCustomIcon = new Icon({
   iconUrl: 'img/pin.svg',
@@ -21,10 +22,13 @@ type MapProps = {
 	cityInfo: CityType;
 	points: OffersType;
 	activeOfferID?: number | null;
-	screenClass: string;
 };
 
-const Map = ({ cityInfo, points, activeOfferID, screenClass }: MapProps): JSX.Element => {
+const getRoute = (pathname: string) => pathname.split('/')[1];
+
+const Map = ({ cityInfo, points, activeOfferID }: MapProps): JSX.Element => {
+  const { pathname } = useLocation();
+  const route = getRoute(pathname);
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityInfo);
 
@@ -48,8 +52,8 @@ const Map = ({ cityInfo, points, activeOfferID, screenClass }: MapProps): JSX.El
   }, [map, points, activeOfferID]);
 
   const mapClassName = cn('map', {
-    'cities__map': screenClass === 'cities',
-    'property__map': screenClass === 'property',
+    'cities__map': pathname === '/',
+    'property__map': route === getRoute('/offer/:id'),
   });
 
   return (
