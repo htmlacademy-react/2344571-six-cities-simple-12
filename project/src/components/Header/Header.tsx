@@ -1,14 +1,11 @@
-import { UserType } from '../../types/user';
 import Logo from '../Logo/Logo';
 import { useState } from 'react';
 import UserInfo from '../UserInfo/UserInfo';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
 
-type HeaderProps = {
-	user: UserType;
-}
-
-function Header({ user }: HeaderProps): JSX.Element {
+function Header(): JSX.Element {
+  const user = useAppSelector((state) => state.user);
   const [isAuth,] = useState(true);
 
   return (
