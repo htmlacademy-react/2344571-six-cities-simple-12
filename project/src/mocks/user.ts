@@ -1,4 +1,4 @@
-export const users = {
+export const user = {
   avatarUrl: 'img/1.png',
   email: 'Oliver.conner@gmail.com',
   id: 1,

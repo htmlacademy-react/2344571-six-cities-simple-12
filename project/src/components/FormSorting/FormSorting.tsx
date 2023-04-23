@@ -27,7 +27,7 @@ function FormSorting(): JSX.Element {
 		HighToLow = 'Price: high to low',
 		TopRatedFirst = 'Top rated first',
 	}
-
+	/* eslint-disable no-mixed-spaces-and-tabs */
 	return (
 	  <form className="places__sorting" action="#" method="get">
 	    <span className="places__sorting-caption">Sort by</span>
@@ -52,6 +52,7 @@ function FormSorting(): JSX.Element {
 	    </ul>
 	  </form>
 	);
+	/* eslint-enable no-mixed-spaces-and-tabs */
 }
 
 export default FormSorting;
