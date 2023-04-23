@@ -13,3 +13,9 @@ export enum SortOption {
   HighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

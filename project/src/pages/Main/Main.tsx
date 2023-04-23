@@ -10,6 +10,7 @@ import MainEmpty from '../../components/MainEmpty/MainEmpty';
 import Map from '../../components/Map/Map';
 import { Cities } from '../../constants';
 import { useAppSelector } from '../../hooks';
+import Loader from '../../components/loader/loader';
 
 enum SortOption {
 	Popular = 'Popular',
@@ -33,7 +34,7 @@ const sortByOption = (offers: OffersType, activeSortType: string) => {
   }
 };
 
-function Main():JSX.Element {
+function Main(): JSX.Element {
   const [activeOfferID, setActiveOfferID] = useState<number | null>(null);
 
   const offers = useAppSelector((state) => state.offers);
@@ -41,6 +42,13 @@ function Main():JSX.Element {
   const activeSortType = useAppSelector((state) => state.activeSortType);
   const filteredOffers = offers.filter((offer) => offer.city.name === activeCity);
   const currentOffers = sortByOption(filteredOffers, activeSortType);
+  const { isDataLoaded } = useAppSelector((state) => state);
+
+  if (isDataLoaded) {
+    return (
+      <Loader/>
+    );
+  }
 
   const handleOfferMouseOver = (id: number) => setActiveOfferID(id);
   const handleOfferMouseLeave = () => setActiveOfferID(null);
@@ -90,7 +98,7 @@ function Main():JSX.Element {
         }
         </div>
       </main>
-      <Footer/>
+      <Footer />
     </>
   );
 }
