@@ -19,3 +19,10 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum AppRoute {
+  Root = '/',
+  Offer = '/offer/:id',
+  Login = '/login',
+  NotFound = '*',
+}
