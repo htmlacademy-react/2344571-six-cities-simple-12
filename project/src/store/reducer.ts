@@ -2,16 +2,16 @@ import { createReducer } from '@reduxjs/toolkit';
 import {
   changeCity,
   setSortType,
-  loadOffers,
-  loadReviews,
+  getOffers,
+  getReviews,
   requireAuthorization,
   setDataLoadedStatus,
+  getUser,
 } from './action';
 import { Cities, SortOption, AuthorizationStatus } from '../constants';
 import { OffersType } from '../types/offers';
 import { ReviewsType } from '../types/reviews';
 import { UserType } from '../types/user';
-import { user } from '../mocks/user';
 
 type initialStateType = {
   activeCity: string;
@@ -20,7 +20,7 @@ type initialStateType = {
   authorizationStatus: string;
   isDataLoaded: boolean;
   reviews: ReviewsType;
-  user: UserType;
+  user: UserType | null;
 };
 
 const initialState: initialStateType = {
@@ -30,21 +30,21 @@ const initialState: initialStateType = {
   reviews: [],
   authorizationStatus: AuthorizationStatus.Unknown,
   isDataLoaded: false,
-  user,
+  user:null,
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      state.activeCity = action.payload.city;
+      state.activeCity = action.payload;
     })
     .addCase(setSortType, (state, action) => {
       state.activeSortType = action.payload.option;
     })
-    .addCase(loadOffers, (state, action) => {
+    .addCase(getOffers, (state, action) => {
       state.offers = action.payload;
     })
-    .addCase(loadReviews, (state, action) => {
+    .addCase(getReviews, (state, action) => {
       state.reviews = action.payload;
     })
     .addCase(setDataLoadedStatus, (state, action) => {
@@ -52,6 +52,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(getUser, (state, action) => {
+      state.user = action.payload;
     });
 });
 

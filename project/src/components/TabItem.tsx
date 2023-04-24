@@ -15,7 +15,7 @@ const TabItem = ({ city }: TabItemProps): JSX.Element => {
   });
 
   return (
-    <li className="locations__item" onClick={() => dispatch(changeCity({ city: city }))}>
+    <li className="locations__item" onClick={() => dispatch(changeCity(city))}>
       <a className={linkClassName} href="#">
         <span>{city}</span>
       </a>

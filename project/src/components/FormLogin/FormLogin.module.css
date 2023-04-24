@@ -1,0 +1,20 @@
+.wrapper {
+  position: relative;
+}
+
+.wrapper input {
+  margin-bottom: 38px;
+}
+
+.error {
+  border: 1px solid red;
+}
+
+.text {
+  position: absolute;
+  top: 42px;
+  left: 0;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 14px;
+}
