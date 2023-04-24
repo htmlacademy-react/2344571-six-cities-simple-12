@@ -2,31 +2,26 @@ import { createAction } from '@reduxjs/toolkit';
 import { OffersType } from '../types/offers';
 import { ReviewsType } from '../types/reviews';
 import { AuthorizationStatus } from '../constants';
+import { UserType } from '../types/user';
 
-export const changeCity = createAction('changeCity', (city) => ({
-  payload: city,
+enum AppRoute {
+  Root = '/',
+  Offer = '/offer/:id',
+  Login = '/login',
+  NotFound = '*',
+}
+
+export const changeCity = createAction<string>('changeCity');
+
+export const setSortType = createAction('setSortType', (option) => ({
+  payload: option,
 }));
 
-export const setSortType = createAction(
-  'setSortType',
-  (option) => ({
-    payload: option,
-  })
-);
+export const getOffers = createAction<OffersType>('getOffers');
 
-export const getOffers = createAction('getOffers', (offers) => ({
-  payload: offers,
-}));
+export const getReviews = createAction<ReviewsType>('getReviews');
 
-export const getReviews = createAction('getReviews', (reviews) => ({
-  payload: reviews
-}));
-
-export const getUser = createAction('getUser', (user) => ({
-  payload: user
-}));
-
-export const loadOffers = createAction<OffersType>('loadOffers');
+export const getUser = createAction<UserType | null>('getUser');
 
 export const requireAuthorization = createAction<AuthorizationStatus>(
   'requireAuthorization'
@@ -34,4 +29,4 @@ export const requireAuthorization = createAction<AuthorizationStatus>(
 
 export const setDataLoadedStatus = createAction<boolean>('setDataLoadedStatus');
 
-export const loadReviews = createAction<ReviewsType>('loadReviews');
+export const redirectToRoute = createAction<AppRoute>('redirectToRoute');

@@ -58,6 +58,10 @@ const Map = ({ cityInfo, points, activeOfferID }: MapProps): JSX.Element => {
 
   return (
     <section
+      style={{
+        maxWidth: '1144px',
+        margin: '0 auto',
+      }}
       className={mapClassName}
       ref={mapRef}
     />
