@@ -26,3 +26,10 @@ export enum AppRoute {
   Login = '/login',
   NotFound = '*',
 }
+
+export enum Type {
+  apartment = 'Apartment',
+  room = 'Private Room',
+  house = 'House',
+  hotel = 'Hotel',
+}

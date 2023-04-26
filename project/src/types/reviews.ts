@@ -13,6 +13,12 @@ type ReviewType = {
   user: UserType;
 };
 
+type ReviewDataType = {
+  id: number;
+  rating: number;
+  comment: string;
+};
+
 type ReviewsType = ReviewType[];
 
-export type { ReviewsType, ReviewType };
+export type { ReviewsType, ReviewType, ReviewDataType };

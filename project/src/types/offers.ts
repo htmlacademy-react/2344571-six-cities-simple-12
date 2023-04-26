@@ -1,7 +1,14 @@
+import { Type } from '../constants';
+
 type LocationType = {
   latitude: number;
   longitude: number;
   zoom: number;
+};
+
+type CityType = {
+  location: LocationType;
+  name: string;
 };
 
 type HostType = {
@@ -27,12 +34,7 @@ type OfferType = {
   price: number;
   rating: number;
   title: string;
-  type: string;
-};
-
-type CityType = {
-  location: LocationType;
-  name: string;
+  type: keyof typeof Type;
 };
 
 type OffersType = OfferType[];
