@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
-import { AuthorizationStatus } from '../../constants/enum';
+import { AuthorizationStatus } from '../../constants/constants';
 import { logoutAction } from '../../store/user-process/api-actions';
 
 const AuthPanel = () => {

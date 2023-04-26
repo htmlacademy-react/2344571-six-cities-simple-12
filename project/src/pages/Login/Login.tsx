@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AuthData } from '../../types/auth-data';
 import { toast } from 'react-toastify';
 import Logo from '../../components/logo';
-import { AuthorizationStatus } from '../../constants/enum';
+import { AuthorizationStatus } from '../../constants/constants';
 import { AppRoute } from '../../router/RoutePath';
 import { Navigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';

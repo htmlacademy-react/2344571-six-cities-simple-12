@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../../constants/enum';
+import { AuthorizationStatus } from '../../constants/constants';
 import { makeFakeUserData } from '../../utils/mocks';
 import { checkAuthAction, loginAction, logoutAction } from './api-actions';
 import { UserProcess } from './types';

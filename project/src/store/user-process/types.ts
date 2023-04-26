@@ -1,4 +1,4 @@
-import { AuthorizationStatus } from '../../constants/enum';
+import { AuthorizationStatus } from '../../constants/constants';
 
 export type UserData = {
   id: number;

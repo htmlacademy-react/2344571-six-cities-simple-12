@@ -1,4 +1,4 @@
-import { Status } from '../../constants/enum';
+import { Status } from '../../constants/constants';
 import { makeFakeReviews } from '../../utils/mocks';
 import { commentProcessSlice, setLoadComments, setNextReview } from './comment-process';
 import { CommentProcess } from './types';
@@ -12,7 +12,6 @@ describe('reducer: offerPropertyData', () => {
       loadComments: [],
       nextReview: null,
       sendCommentStatus: Status.Idle,
-      reviewsLoading: false,
     };
   });
 
@@ -27,12 +26,12 @@ describe('reducer: offerPropertyData', () => {
       type: setLoadComments,
       payload: fakeReviews
     });
-    expect(commentReducer).toEqual({ loadComments: fakeReviews, nextReview: null, sendCommentStatus: 'idle', reviewsLoading: false, });
+    expect(commentReducer).toEqual({ loadComments: fakeReviews, nextReview: null, sendCommentStatus: 'idle' });
   });
 
   it('nextReview', () => {
     const commentReducer = commentProcessSlice.reducer(state, { type: setNextReview, payload: fakeReviews[0] });
-    expect(commentReducer).toEqual({ loadComments: [], nextReview: fakeReviews[0], sendCommentStatus: 'idle', reviewsLoading: false });
+    expect(commentReducer).toEqual({ loadComments: [], nextReview: fakeReviews[0], sendCommentStatus: 'idle' });
   });
 });
 

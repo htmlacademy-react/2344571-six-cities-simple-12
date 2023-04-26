@@ -1,5 +1,5 @@
 import { CITIES } from '../../components/cities/constants';
-import { SortingTypes } from '../../constants/enum';
+import { SortingTypes } from '../../constants/constants';
 import { makeFakeOffers } from '../../utils/mocks';
 import { fetchOfferAction } from './api-actions';
 import { offerProcessSlice } from './offer-process';

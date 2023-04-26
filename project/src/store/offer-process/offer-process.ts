@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { NameSpace, SortingTypes } from '../../constants/constants';
 import { Offers } from '../../types/offers';
 import { OfferProcess } from './types';
 import { CITIES } from '../../components/cities/constants';
-import { NameSpace, SortingTypes } from '../../constants/enum';
 
 const initialState: OfferProcess = {
   offers: [],
