@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../../types/state';
 import { AxiosInstance } from 'axios';
-import { APIRoute } from '../../services/enum';
+import { APIRoute } from '../../services/constants';
 import { setLoadComments, setNextReview } from './comment-process';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,13 +15,8 @@ export const fetchCommentsAction = createAsyncThunk<void, OfferId, {
 }>(
   'data/fetchComments',
   async ({ id }, { dispatch, extra: api }) => {
-    try {
-      const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${id}`);
-      dispatch(setLoadComments(data));
-    } catch (err) {
-      toast.error('Unfortunately, we can\'t show comments');
-      throw err;
-    }
+    const { data } = await api.get<Comment[]>(`${APIRoute.Comments}/${id}`);
+    dispatch(setLoadComments(data));
   },
 );
 

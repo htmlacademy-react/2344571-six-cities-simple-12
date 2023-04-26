@@ -7,7 +7,6 @@ describe('Slice: nearOffer', () => {
   beforeEach(() => {
     state = {
       nearOffers: [],
-      offersNearbyLoading: false
     };
   });
 
@@ -23,8 +22,7 @@ describe('Slice: nearOffer', () => {
 
     expect(nearOfferReducer).toEqual({
       ...state,
-      nearOffers: fakeNearOffers,
-      offersNearbyLoading: false
+      nearOffers: fakeNearOffers
     });
   });
 });

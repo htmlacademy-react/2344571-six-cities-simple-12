@@ -1,4 +1,4 @@
-import { SortingTypes } from '../constants/enum';
+import { SortingTypes } from '../constants/constants';
 import { Offers } from '../types/offers';
 
 export const getSortingOffers = (offers: Offers[], activeSort: string) => {

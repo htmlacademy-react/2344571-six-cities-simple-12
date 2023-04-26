@@ -5,7 +5,7 @@ import Login from './login';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
 import { AppRoute } from '../../router/RoutePath';
-import { AuthorizationStatus, NameSpace } from '../../constants/enum';
+import { AuthorizationStatus, NameSpace } from '../../constants/constants';
 
 const mockStore = configureMockStore();
 

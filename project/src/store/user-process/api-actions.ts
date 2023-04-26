@@ -1,4 +1,4 @@
-import { APIRoute } from '../../services/enum';
+import { APIRoute } from '../../services/constants';
 import { toast } from 'react-toastify';
 import { AuthData } from '../../types/auth-data';
 import { dropToken, saveToken } from '../../services/token';

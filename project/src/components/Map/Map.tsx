@@ -4,7 +4,7 @@ import { Icon, Marker } from 'leaflet';
 import { Offers, City } from '../../types/offers';
 import useMap from '../../hooks/use-map';
 import { useEffect, useRef } from 'react';
-import { DEFAULT_COORDINATE, ICON_ANCHOR, ICON_SIZE, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from './constants';
+import { DEFAULT_COORDINATE, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from './constants';
 import { useMapMarkers } from '../../hooks/use-map/use-map';
 
 type MapProps = {
@@ -16,21 +16,21 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: ICON_SIZE,
-  iconAnchor: ICON_ANCHOR,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: ICON_SIZE,
-  iconAnchor: ICON_ANCHOR,
+  iconSize: [27, 39],
+  iconAnchor: [13.5, 39],
 });
 
 const Map = ({ className, city, offers, selectedOfferId }: MapProps) => {
   const mapRef = useRef(null);
 
-  const { map, mapMarkers } = useMap(mapRef, city);
-  const { addMarker, clearMarkers } = useMapMarkers({ map, mapMarkers });
+  const {map, mapMarkers} = useMap(mapRef, city);
+  const { addMarker, clearMarkers } = useMapMarkers({map, mapMarkers});
   const cityLocation = offers[0]?.city?.location ?? DEFAULT_COORDINATE;
 
   useEffect(() => {

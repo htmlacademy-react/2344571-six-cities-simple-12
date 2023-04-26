@@ -1,15 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { NameSpace, Status } from '../../constants/constants';
 import { CommentProcess, } from './types';
 import { Comment } from '../../types/comments';
 import { Review } from '../../types/review';
-import { fetchCommentsAction, sendCommentAction } from './api-actionts';
-import { NameSpace, Status } from '../../constants/enum';
+import { sendCommentAction } from './api-actionts';
 
 const initialState: CommentProcess = {
   loadComments: [],
   nextReview: null,
   sendCommentStatus: Status.Idle,
-  reviewsLoading: false,
 };
 
 export const commentProcessSlice = createSlice({
@@ -34,12 +33,6 @@ export const commentProcessSlice = createSlice({
 
     builder.addCase(sendCommentAction.rejected, (state) => {
       state.sendCommentStatus = Status.Error;
-    });
-    builder.addCase(fetchCommentsAction.pending, (state) => {
-      state.reviewsLoading = true;
-    });
-    builder.addCase(fetchCommentsAction.fulfilled, (state) => {
-      state.reviewsLoading = false;
     });
   }
 });
