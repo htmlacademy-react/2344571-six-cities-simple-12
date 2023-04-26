@@ -1,72 +1,75 @@
-import useMap from '../../hooks/useMap';
 import 'leaflet/dist/leaflet.css';
+import classnames from 'classnames';
 import { Icon, Marker } from 'leaflet';
-import { CityType, OffersType } from '../../types/offers';
-import { useRef, useEffect } from 'react';
-import cn from 'classnames';
-import { useLocation } from 'react-router-dom';
+import { Offers, City } from '../../types/offers';
+import useMap from '../../hooks/use-map';
+import { useEffect, useRef } from 'react';
+import { DEFAULT_COORDINATE, ICON_ANCHOR, ICON_SIZE, URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from './constants';
+import { useMapMarkers } from '../../hooks/use-map/use-map';
+
+type MapProps = {
+  className: string;
+  city: City;
+  offers: Offers[];
+  selectedOfferId?: number | null;
+};
 
 const defaultCustomIcon = new Icon({
-  iconUrl: 'img/pin.svg',
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39]
+  iconUrl: URL_MARKER_DEFAULT,
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR,
 });
 
 const currentCustomIcon = new Icon({
-  iconUrl: 'img/pin-active.svg',
-  iconSize: [27, 39],
-  iconAnchor: [13.5, 39]
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: ICON_SIZE,
+  iconAnchor: ICON_ANCHOR,
 });
 
-type MapProps = {
-	cityInfo: CityType;
-	points: OffersType;
-	activeOfferID?: number | null;
-};
-
-const getRoute = (pathname: string) => pathname.split('/')[1];
-
-const Map = ({ cityInfo, points, activeOfferID }: MapProps): JSX.Element => {
-  const { pathname } = useLocation();
-  const route = getRoute(pathname);
+const Map = ({ className, city, offers, selectedOfferId }: MapProps) => {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cityInfo);
+
+  const { map, mapMarkers } = useMap(mapRef, city);
+  const { addMarker, clearMarkers } = useMapMarkers({ map, mapMarkers });
+  const cityLocation = offers[0]?.city?.location ?? DEFAULT_COORDINATE;
 
   useEffect(() => {
     if (map) {
-      points.slice(0, 3).forEach((point) => {
+      const { latitude, longitude, zoom } = cityLocation;
+      map.flyTo([latitude, longitude], zoom);
+    }
+  }, [map, cityLocation]);
+
+  useEffect(() => {
+    if (map && mapMarkers) {
+      clearMarkers();
+      offers.forEach((offer) => {
         const marker = new Marker({
-          lat: point.location.latitude,
-          lng: point.location.longitude
+          lat: offer.location.latitude,
+          lng: offer.location.longitude,
         });
 
         marker
           .setIcon(
-            activeOfferID && point.id === activeOfferID
+            selectedOfferId && offer.id === selectedOfferId
               ? currentCustomIcon
               : defaultCustomIcon
-          )
-          .addTo(map);
+          );
+        mapMarkers.addLayer(marker);
+        addMarker(marker);
       });
     }
-  }, [map, points, activeOfferID]);
+  }, [map, offers, selectedOfferId]);
 
-  const mapClassName = cn('map', {
-    'cities__map': pathname === '/',
-    'property__map': route === getRoute('/offer/:id'),
-  });
 
   return (
     <section
-      style={{
-        maxWidth: '1144px',
-        margin: '0 auto',
-      }}
-      className={mapClassName}
+      className={classnames('map', className)}
+      style={{ height: '562px' }}
       ref={mapRef}
-    />
+    >
+    </section>
   );
 };
 
 export default Map;
-

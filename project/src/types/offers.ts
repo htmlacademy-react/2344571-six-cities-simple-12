@@ -1,42 +1,34 @@
-import { Type } from '../constants';
+import { User } from './user';
+import { Location } from './location';
 
-type LocationType = {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-};
-
-type CityType = {
-  location: LocationType;
+export type City = {
+  location: Location;
   name: string;
 };
 
-type HostType = {
-  avatarUrl: string;
-  id: number;
-  isPro: boolean;
-  name: string;
-};
-
-type OfferType = {
+export type Offers = {
   bedrooms: number;
-  city: CityType;
+  city: City;
   description: string;
   goods: string[];
-  host: HostType;
+  host: User;
   id: number;
   images: string[];
-  isFavorite: boolean;
   isPremium: boolean;
-  location: LocationType;
+  location: Location;
   maxAdults: number;
   previewImage: string;
   price: number;
   rating: number;
   title: string;
-  type: keyof typeof Type;
+  type: string;
 };
 
-type OffersType = OfferType[];
-
-export type { OffersType, OfferType, CityType, LocationType, HostType };
+export const CityLocation: City = {
+  location: {
+    latitude: 52.370216,
+    longitude: 4.895168,
+    zoom: 10,
+  },
+  name: 'Amsterdam',
+};
