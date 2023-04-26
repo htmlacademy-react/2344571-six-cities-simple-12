@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { changeCity } from '../store/action';
+import { changeActiveCity } from '../store/action';
 
 type TabItemProps = {
 	city: string;
@@ -15,7 +15,7 @@ const TabItem = ({ city }: TabItemProps): JSX.Element => {
   });
 
   return (
-    <li className="locations__item" onClick={() => dispatch(changeCity(city))}>
+    <li className="locations__item" onClick={() => dispatch(changeActiveCity(city))}>
       <a className={linkClassName} href="#">
         <span>{city}</span>
       </a>

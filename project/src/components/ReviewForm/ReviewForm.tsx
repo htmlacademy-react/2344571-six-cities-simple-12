@@ -1,77 +1,90 @@
-import React, { SyntheticEvent, useState } from 'react';
+import { useState, ChangeEvent, FormEvent } from 'react';
+import ReviewFormInput from '../ReviewFormInput/ReviewFromInput';
+import { useAppDispatch } from '../../hooks';
+import { postReviewAction } from '../../store/api-actions';
+import { ReviewDataType } from '../../types/reviews';
 
-function ReviewForm(): JSX.Element {
-  const [formValue, setFormValue] = useState({
-    rating: 0,
+const Stars = ['5', '4', '3', '2', '1'];
+
+const minLength = 50;
+const maxLength = 300;
+
+type FormReviewProps = {
+	offerId: number;
+}
+
+const ReviewForm = ({ offerId }: FormReviewProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const [formData, setFormData] = useState({
+    rating: '',
     review: '',
+    isValid: false,
   });
 
-  const stars = [
-    {
-      value: 5,
-      title: 'perfect',
-    },
-    {
-      value: 4,
-      title: 'good'
-    },
-    {
-      value: 3,
-      title: 'not bad'
-    },
-    {
-      value: 2,
-      title: 'badly'
-    },
-    {
-      value: 1,
-      title: 'terribly'
-    },
-  ];
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = evt.target;
+    const isValid = value.length >= minLength && value.length <= maxLength;
 
-  const onChange = (event: SyntheticEvent): void => {
-    const target = event.target as HTMLTextAreaElement;
-
-    const name = target.name;
-
-    setFormValue({
-      ...formValue,
-      [name]: target.value
-    });
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+      isValid,
+    }));
   };
 
-  const onRatingChange = (star: typeof stars[0]): void => {
-    setFormValue({
-      ...formValue,
-      rating: star.value,
+  const onSubmit = (reviewData: ReviewDataType) => {
+    dispatch(postReviewAction(reviewData));
+  };
+
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>): void => {
+    evt.preventDefault();
+    onSubmit({
+      id: offerId,
+      rating: Number(formData.rating),
+      comment: formData.review,
+    });
+
+    setFormData({
+      rating: '',
+      review: '',
+      isValid: false,
     });
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form
+      className="reviews__form form"
+      action="#"
+      method="post"
+      onSubmit={handleFormSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        {stars.map((star) => (
-          <React.Fragment key={star.value}>
-            <input className="form__rating-input visually-hidden" name="rating" value={star.value} id={`${star.value}-stars`} type="radio" onInput={() => onRatingChange(star)} />
-            <label htmlFor={`${star.value}-stars`} className="reviews__rating-label form__rating-label" title={star.title}>
-              <svg className="form__star-image" width="37" height="33">
-                <use xlinkHref="#icon-star"></use>
-              </svg>
-            </label>
-          </React.Fragment>
-        ))}
+        {Stars.map((star) => <ReviewFormInput rating={formData.rating} value={star} key={star} onChange={handleInputChange} />)}
       </div>
-      <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved" onInput={onChange} />
+      <textarea
+        className="reviews__textarea form__textarea"
+        id="review"
+        name="review"
+        placeholder="Tell how was your stay, what you like and what can be improved"
+        onChange={handleInputChange}
+        value={formData.review}
+      />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-					To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+					To submit review please make sure to set <span className="reviews__star">rating</span> and describe
+					your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button
+          className="reviews__submit form__submit button"
+          type="submit"
+          disabled={!formData.review || !formData.rating || !formData.isValid}
+        >
+					Submit
+        </button>
       </div>
     </form>
   );
-}
-
+};
 
 export default ReviewForm;

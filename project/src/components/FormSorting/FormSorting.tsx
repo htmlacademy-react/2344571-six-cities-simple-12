@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
 import cn from 'classnames';
-import { setSortType } from '../../store/action';
+import { setActiveSortType } from '../../store/action';
 import SortItem from '../SortItem/SortItem';
 
 function FormSorting(): JSX.Element {
@@ -43,7 +43,7 @@ function FormSorting(): JSX.Element {
 	          key={option}
 	          option={option}
 	          onOptionClick={() => {
-	            dispatch(setSortType({ option: option }));
+	            dispatch(setActiveSortType({ option: option }));
 	            handleOptionClick();
 	          }}
 	          isActive={option === activeSortType}
