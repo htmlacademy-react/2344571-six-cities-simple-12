@@ -1,48 +1,40 @@
-import axios, {
-  AxiosInstance,
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-} from 'axios';
-import { StatusCodes } from 'http-status-codes';
+import axios, { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { REQUEST_TIMEOUT, BACKEND_URL } from './constants';
 import { getToken } from './token';
-import { toast } from 'react-toastify';
+import { processErrorHandle } from './process-error-handle';
+import { StatusCodes } from 'http-status-codes';
 
-const BACKEND_URL = 'https://12.react.pages.academy/six-cities-simple';
-const REQUEST_TIMEOUT = 5000;
-
-const StatusCodeMapping: Record<number, boolean> = {
+const StatusCodeMapping: { [key: number]: boolean } = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true,
 };
 
-const shouldDisplayError = (response: AxiosResponse) =>
-  !!StatusCodeMapping[response.status];
+const shouldDisplayError = (response: AxiosResponse) => !!StatusCodeMapping[response.status];
 
-const createAPI = (): AxiosInstance => {
+export const createAPI = (): AxiosInstance => {
   const api = axios.create({
     baseURL: BACKEND_URL,
     timeout: REQUEST_TIMEOUT,
   });
 
-  api.interceptors.request.use((config: AxiosRequestConfig) => {
-    config.headers = config.headers ?? {};
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const token = getToken();
 
-    const token = getToken();
+      if (token && config.headers) {
+        config.headers['x-token'] = token;
+      }
 
-    if (token && config.headers) {
-      config.headers['x-token'] = token;
-    }
-
-    return config;
-  });
+      return config;
+    },
+  );
 
   api.interceptors.response.use(
     (response) => response,
     (error: AxiosError<{ error: string }>) => {
-      if (error?.response && shouldDisplayError(error.response)) {
-        toast.warn(error.response.data.error);
+      if (error.response && shouldDisplayError(error.response)) {
+        processErrorHandle(error.response.data.error);
       }
 
       throw error;
@@ -52,4 +44,3 @@ const createAPI = (): AxiosInstance => {
   return api;
 };
 
-export default createAPI;

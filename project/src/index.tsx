@@ -1,24 +1,26 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app';
-import { store } from './store';
+import App from './components/app/index';
 import { Provider } from 'react-redux';
-import { fetchOffersAction, checkAuthAction } from './store/api-actions';
+import { store } from './store';
+import ErrorMessage from './components/error-message';
 import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { checkAuthAction } from './store/user-process/api-actions';
+import { fetchOfferAction } from './store/offer-process/api-actions';
 
-store.dispatch(fetchOffersAction());
+store.dispatch(fetchOfferAction());
 store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
-	document.getElementById('root') as HTMLElement,
+  document.getElementById('root') as HTMLElement,
 );
 
 root.render(
-  <React.StrictMode>
+  <StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <ToastContainer />
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider >
+  </StrictMode>
 );
