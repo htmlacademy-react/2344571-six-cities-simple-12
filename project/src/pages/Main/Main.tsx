@@ -11,6 +11,7 @@ import Map from '../../components/Map/Map';
 import { Cities } from '../../constants';
 import { useAppSelector } from '../../hooks';
 import Loader from '../../components/loader/loader';
+import HeaderNav from '../../components/HeaderNav/HeaderNav';
 
 enum SortOption {
 	Popular = 'Popular',
@@ -46,7 +47,7 @@ function Main(): JSX.Element {
 
   if (isDataLoaded) {
     return (
-      <Loader/>
+      <Loader />
     );
   }
 
@@ -62,7 +63,10 @@ function Main(): JSX.Element {
   });
 
   return (
-    <><Header />
+    <>
+      <Header>
+        <HeaderNav/>
+      </Header>
       <main className={mainClassName}>
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -79,7 +83,7 @@ function Main(): JSX.Element {
                 <section className="cities__places places">
                   <h2 className="visually-hidden">Places</h2>
                   <b className="places__found">{getTitle(currentOffers.length)}</b>
-                  <FormSorting />
+                  <FormSorting/>
                   <Offers
                     offers={currentOffers}
                     onOfferMouseOver={handleOfferMouseOver}

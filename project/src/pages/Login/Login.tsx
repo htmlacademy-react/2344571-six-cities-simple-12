@@ -1,7 +1,7 @@
 import HeaderLogin from '../../components/HeaderLogin/HeaderLogin';
 import FormLogin from '../../components/FormLogin/FormLogin';
 import { generatePath, Link, Navigate } from 'react-router-dom';
-import { changeCity } from '../../store/action';
+import { changeActiveCity } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { AppRoute, AuthorizationStatus, Cities } from '../../constants';
 
@@ -30,7 +30,7 @@ function Login(): JSX.Element {
               <Link
                 className="locations__item-link"
                 to={generatePath(AppRoute.Root)}
-                onClick={() => dispatch(changeCity(randomCity))}
+                onClick={() => dispatch(changeActiveCity(randomCity))}
               >
                 <span>{randomCity}</span>
               </Link>
