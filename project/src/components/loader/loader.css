@@ -1,0 +1,37 @@
+.spinner {
+  display: inline-block;
+  width: 164px;
+  height: 164px;
+  margin: auto;
+}
+
+.spinner__dot1,
+.spinner__dot2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  background-color: #4481c3;
+  animation: spinner 2s linear infinite;
+}
+
+.spinner__dot2 {
+  animation-delay: -1s;
+}
+
+@keyframes spinner {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
