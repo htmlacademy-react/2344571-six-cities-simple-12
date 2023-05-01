@@ -1,12 +1,13 @@
-import { useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks/store';
 import './error-message.css';
 
-const ErrorMessage = () => {
-  const error = useAppSelector((state) => state.OFFER.error);
+function ErrorMessage(): JSX.Element | null {
+  const error = useAppSelector((state) => state.error);
 
   return (error)
     ? <div className='error-message'>{error}</div>
     : null;
-};
+
+}
 
 export default ErrorMessage;

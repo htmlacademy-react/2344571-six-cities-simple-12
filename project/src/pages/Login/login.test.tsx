@@ -1,11 +1,11 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
-import HistoryRouter from '../../components/history-router';
+import HistoryRouter from '../../components/history-router/history-router';
 import Login from './login';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { Provider } from 'react-redux';
-import { AppRoute } from '../../router/RoutePath';
-import { AuthorizationStatus, NameSpace } from '../../constants/constants';
+import { AppRoute } from '../../const';
+import { AuthorizationStatus, NameSpace } from '../../const';
 
 const mockStore = configureMockStore();
 
@@ -22,7 +22,7 @@ describe('Component: Login', () => {
     render(
       <Provider store={mockStore(initialState)}>
         <HistoryRouter history={history}>
-          <Login />
+          <Login/>
         </HistoryRouter>
       </Provider>,
     );

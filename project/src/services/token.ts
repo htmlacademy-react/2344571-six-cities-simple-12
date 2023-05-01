@@ -1,4 +1,4 @@
-import { AUTH_TOKEN_KEY_NAME } from './constants';
+const AUTH_TOKEN_KEY_NAME = 'six-cities-simple-token';
 
 export type Token = string;
 
