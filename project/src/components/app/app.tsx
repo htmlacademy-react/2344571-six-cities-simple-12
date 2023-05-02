@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import MainScreen from '../../pages/main1/main1';
-import Login from '../../pages/login1/login1';
+import MainScreen from '../../pages/main/main';
+import Login from '../../pages/login/login';
 import ErrorScreen from '../../pages/not-found/not-found';
 import PropertyScreen from '../../pages/property/property';
 import Layout from '../layout/layout';
