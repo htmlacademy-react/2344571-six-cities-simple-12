@@ -58,8 +58,6 @@ function PropertyScreen(): JSX.Element {
     return (<Navigate to={AppRoute.Empty} replace />);
   } else if (!selectedOffer) { return <ErrorScreen />; }
 
-  const styleProp = { height: '579px', width: '1144px', marginLeft: 'auto', marginRight: 'auto', marginBottom: '50px' };
-
   return (
     <main ref={ref} className='page page__main page__main--property'>
       <section className='property'>
@@ -138,7 +136,7 @@ function PropertyScreen(): JSX.Element {
             </section>
           </div>
         </div>
-        <MapComponent className='map' offers={similarOffers.concat(selectedOffer)} style={styleProp} activeOffer={activeOffer} />
+        <MapComponent className='property__map map' offers={similarOffers.concat(selectedOffer)} activeOffer={activeOffer} />
       </section>
       <div className='container'>
         <section className='near-places places'>

@@ -1,9 +1,18 @@
 import { Outlet } from 'react-router-dom';
 import { Header } from '../header/header';
+import { AppRoute } from '../../const';
+import cn from 'classnames';
+import { useLocation } from 'react-router-dom';
 
 function Layout() {
+  const { pathname } = useLocation();
+
+  const pageClassName = cn('page', {
+    'page--gray page--main': pathname === AppRoute.Main,
+    'page--gray page--login': pathname === AppRoute.Login,
+  });
   return (
-    <div className='page page--gray page--main'>
+    <div className={pageClassName}>
       <div style={{ display: 'none' }}>
         <svg xmlns='http://www.w3.org/2000/svg'>
           <symbol id='icon-arrow-select' viewBox='0 0 7 4'>

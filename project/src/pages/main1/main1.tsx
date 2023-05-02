@@ -58,7 +58,7 @@ function MainScreen(): JSX.Element {
               <OffersListComponent offers={currentedOffers} setActiveOffer={setActiveOffer} />
             </section>
             <div className="cities__right-section">
-              <MapComponent className='cities__map map' activeOffer={activeOffer} offers={currentedOffers} style={{ height: '1100px' }} />
+              <MapComponent className='cities__map map' activeOffer={activeOffer} offers={currentedOffers} />
             </div>
           </div>
         )}
