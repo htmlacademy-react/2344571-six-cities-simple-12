@@ -7,15 +7,10 @@ import useMap from '../../hooks/use-map';
 import { useAppSelector } from '../../hooks/store';
 import { useParams } from 'react-router-dom';
 
-type StyleMap = {
-  height: string;
-};
-
 type MapComponentProps = {
   activeOffer: number | null;
   offers: Offers;
   className: string;
-  style: StyleMap;
 };
 
 const defaultCustomIcon = new Icon({
@@ -31,7 +26,7 @@ const currentCustomIcon = new Icon({
 });
 
 function MapComponent(props: MapComponentProps): JSX.Element {
-  const { activeOffer, offers, className, style } = props;
+  const { activeOffer, offers, className } = props;
   const mapRef = useRef(null);
   const selectedCity = useAppSelector(({ city }) => city);
   const map = useMap(mapRef, selectedCity);
@@ -77,7 +72,7 @@ function MapComponent(props: MapComponentProps): JSX.Element {
   }, [map, offers, activeOffer, selectedCity, activeMarker, className]);
 
   return (
-    <section className={className} ref={mapRef} style={style} />
+    <section className={className} ref={mapRef} />
   );
 }
 
